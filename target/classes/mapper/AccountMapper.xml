@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lfb.mapper.AccountMapper">
+  <!--查询账号信息-->
+  <select id="accountPage" resultType="com.lfb.entity.Account">
+      select a.*, r.role_name
+      from account a inner JOIN role r on a.role_id = r.role_id
+      ${ew.customSqlSegment}
+  </select>
+
+  <select id="selectAccountById" resultType="com.lfb.entity.Account">
+    select a.*, r.role_name
+    from account a inner JOIN role r on a.role_id = r.role_id
+    where a.account_id = #{id} and a.deleted = 0
+    /*只有未被删除的才可进行查询*/
+  </select>
+
+</mapper>
